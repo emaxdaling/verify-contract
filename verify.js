@@ -45,7 +45,7 @@ module.exports = async (config) => {
   const options = await parseConfig(config)
 
   // Verify each contract
-  const contractNameAddressPairs = config._.slice(1)
+  const contractNameAddressPairs = config._.slice(0)
 
   // Track which contracts failed verification
   const failedContracts = []
@@ -122,7 +122,7 @@ const parseConfig = async (config) => {
               : etherscanApiKey
 
   enforce(apiKey, 'No Etherscan API key specified', logger)
-  enforce(config._.length > 1, 'No contract name(s) specified', logger)
+  enforce(config._.length > 0, 'No contract name(s) specified', logger)
 
   const projectDir = config.working_directory
   const contractsBuildDir = config.contracts_build_directory
@@ -333,6 +333,7 @@ const verificationStatus = async (guid, options) => {
         return verificationResult.data.result
       }
     } catch (error) {
+      console.log(error.message)
       logger.debug(error.message)
       throw new Error(`Failed to connect to Etherscan API at url ${options.apiUrl}`)
     }
