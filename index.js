@@ -1,4 +1,6 @@
-import verify from "./verify";
+
+const verify = require('./verify')
+
 
 
 
