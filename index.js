@@ -17,6 +17,8 @@ const api_keys = {
 
 const network_id = '97'
 
+
+//  truffle build dir path
 const contracts_build_directory = '...'
 
 
